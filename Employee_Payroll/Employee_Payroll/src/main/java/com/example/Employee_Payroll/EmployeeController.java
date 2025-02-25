@@ -1,22 +1,19 @@
 package com.example.Employee_Payroll;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController // Declares the class as the controller
-@RequestMapping("/api/test") // Root URL 
-
+@RestController
+@RequestMapping("/employee")
 public class EmployeeController {
 
-    // GET request - Fetch Data
-    @GetMapping
-    public String getData() {
-        Employee employee = new Employee("Aman", 50000);
-        return "GET Request: Data fetched successfully!";
-    }
+    // Inject the service using autowired
+    @Autowired
+    private  EmployeeService employeeService;
 
-    // POST request - Create Data
-    @PostMapping
-    public String postData(@RequestBody EmployeeDTO employeeDTO) {
-        return "Employee " + employeeDTO.getName() + " with salary " + employeeDTO.getSalary() + " added successfully!";
+    // Handle the REST APIs
+    @PostMapping("/create")
+    public Employee createEmployee(@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.createRecord(employeeDTO);
     }
-
 }
