@@ -9,24 +9,14 @@ public class EmployeeController {
     // GET request - Fetch Data
     @GetMapping
     public String getData() {
+        Employee employee = new Employee("Aman", 50000);
         return "GET Request: Data fetched successfully!";
     }
 
     // POST request - Create Data
     @PostMapping
-    public String postData() {
-        return "POST Request: Data created successfully!";
+    public String postData(@RequestBody EmployeeDTO employeeDTO) {
+        return "Employee " + employeeDTO.getName() + " with salary " + employeeDTO.getSalary() + " added successfully!";
     }
 
-    // PUT request - Update Data
-    @PutMapping
-    public String putData() {
-        return "PUT Request: Data updated successfully!";
-    }
-
-    // DELETE request - Delete Data
-    @DeleteMapping
-    public String deleteData() {
-        return "DELETE Request: Data deleted successfully!";
-    }
 }
